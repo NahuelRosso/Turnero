@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import FormRegister from "./pages/formRegister/formRegister";
-import {Login} from "./pages/formLogin/formLogin";
+import { FormRegister } from "./pages/formRegister/formRegister";
+
 
 export const AppRouter = () => {
     return (
