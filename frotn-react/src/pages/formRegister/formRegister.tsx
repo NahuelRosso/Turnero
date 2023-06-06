@@ -8,15 +8,11 @@ import { Card, Typography } from "@mui/material";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useForm } from "react-hook-form";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { IUser } from "../../models/users";
+import axios, { AxiosResponse } from "axios";
+import ApiService from "../../shared/services/userServices/userServices";
+import { useNavigate } from "react-router-dom";
 
-interface FormData {
-  Name: string;
-  Phone: string;
-  HomeAddress: string;
-  Email: string;
-  Password: string;
-  ConfirmPassword: string;
-}
 
 export const FormRegister = () => {
   const {
@@ -24,12 +20,36 @@ export const FormRegister = () => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<FormData>();
- 
+  } = useForm<IUser>();
+  const navigate = useNavigate();
+
+  const apiService = new ApiService('http://localhost:8081'); // Reemplaza con la URL correcta de tu backend en Java
 
   const onSubmit = handleSubmit((values) => {
-    alert(JSON.stringify(values));
-    
+    const datos: IUser = {
+      HomeAddress: values.HomeAddress,
+      id: '',
+      name: values.name,
+      surname: '',
+      user: values.user,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+      role: '',
+      image: '',
+      address: '',
+      gender: '',
+      phone: values.phone,
+    };
+
+    apiService
+      .createUser(datos)
+      .then((response: string) => {
+        navigate("/")
+        console.log(response);
+      })
+      .catch((error: Error) => {
+        console.error(error);
+      });
   });
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -61,15 +81,15 @@ export const FormRegister = () => {
               label="Name"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("Name", {
+              {...register("name", {
                 required: true,
                 minLength: 2,
               })}
-              {...(errors.Name?.type === "required" && {
+              {...(errors.name?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.Name?.type === "minLength" && {
+              {...(errors.name?.type === "minLength" && {
                 helperText: "El nombre es demaciado corto",
                 error: true,
               })}
@@ -80,16 +100,16 @@ export const FormRegister = () => {
               label="Phone"
               sx={{ m: 1, width: "25ch" }}
               type="tel"
-              {...register("Phone", {
+              {...register("phone", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.Phone?.type === "required" && {
+              {...(errors.phone?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.Phone?.type === "minLenght" && {
+              {...(errors.phone?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
@@ -120,16 +140,16 @@ export const FormRegister = () => {
               label="Email"
               sx={{ m: 1, width: "25ch" }}
               type="email"
-              {...register("Email", {
+              {...register("user", {
                 required: true,
                 pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                 minLength: 2,
               })}
-              {...(errors.Email?.type === "required" && {
+              {...(errors.user?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.Email?.type === "pattern" && {
+              {...(errors.user?.type === "pattern" && {
                 helperText: "Ingrese un email válido",
                 error: true,
               })}
@@ -140,20 +160,20 @@ export const FormRegister = () => {
               sx={{ m: 1, width: "25ch" }}
               type={showPassword ? "text" : "password"}
               label="Password"
-              {...register("Password", {
+              {...register("password", {
                 required: true,
       
                 minLength: 2,
               })}
-              {...(errors.Password?.type === "required" && {
+              {...(errors.password?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.Password?.type === "minLength" && {
+              {...(errors.password?.type === "minLength" && {
                 helperText: "La contraseña es demasiado corta",
                 error: true,
               })}
-              {...(errors.Password?.type === "pattern" && {
+              {...(errors.password?.type === "pattern" && {
                 helperText: "La contraseña debe tener minimo 8 caracteres,minuscula, mayuscula, número y caracter especial",
                 error: true,
               })}
@@ -178,16 +198,16 @@ export const FormRegister = () => {
               sx={{ m: 1, width: "25ch" }}
               type={showPassword ? "text" : "password"}
               label="Confirm Password"
-              {...register("ConfirmPassword", {
+              {...register("confirmPassword", {
                 required: true,
                 minLength: 2,
-                validate: (value) => value === getValues("Password"),
+                validate: (value) => value === getValues("password"),
               })}
-              {...(errors.ConfirmPassword?.type === "required" && {
+              {...(errors.confirmPassword?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.ConfirmPassword?.type === "validate" && {
+              {...(errors.confirmPassword?.type === "validate" && {
                 helperText: "Las Contraseñas deben Coincidir",
                 error: true,
               })}
