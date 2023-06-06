@@ -1,27 +1,43 @@
 
-import React from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {Box, Button, Container, Grid, Paper, TextField, Typography} from "@mui/material";
+import ApiService from "../../shared/services/userServices/userServices";
+import { useNavigate } from "react-router-dom";
+import { ILoginUser } from "../../models/users";
 
-type LoginType ={
-username: string;
-password: string;
-}
 
-export const Login: React.FC<{}>= () => {
-  const [loginData, setLoginData] = React.useState<LoginType>({
-    username: "",
+
+export const Login= () => {
+  const [loginData, setLoginData] = useState<ILoginUser>({
+    user: "",
     password: "",
   });
+  const navigate = useNavigate();
+  const apiService = new ApiService('http://localhost:8081'); 
 
-  const dataLogin = (e: React.ChangeEvent<HTMLInputElement>) =>{
-    setLoginData({ ...loginData, [e.target.name]: e.target.value});
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) =>{
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(loginData);
 
+    try {
+      const response = await apiService.login(loginData);
+      // Maneja la respuesta exitosa aquí, por ejemplo, redirige a otra página
+      navigate('/dashboard');
+    } catch (error) {
+       // Comprueba que el error tenga el tipo adecuado
+    if (error instanceof Error) {
+      console.error('Error de inicio de sesión:', error.message);
+    } else {
+      console.error('Error de inicio de sesión:', error);
+    }
   }
+  };
+  
+  
   return (
     <Container maxWidth="sm">
       <Grid 
@@ -36,13 +52,13 @@ export const Login: React.FC<{}>= () => {
             <Typography sx={{mt:1, mb:1 }} variant="h4">Iniciar sesion</Typography>
             <Box component="form" onSubmit={handleSubmit}>
               <TextField 
-              name="username"
+              name="user"
               margin= "normal"
               type="text" 
               fullWidth label="Email:" 
               sx={{mt: 1.5, mb: 1.5}}
               required
-              onChange={dataLogin}
+              onChange={handleInputChange}
               />
 
 
@@ -53,7 +69,7 @@ export const Login: React.FC<{}>= () => {
               fullWidth label="contraseña:" 
               sx={{mt: 0.5, mb: 0.5}}
               required
-              onChange={dataLogin}
+              onChange={handleInputChange}
               />
 
               <Button 
