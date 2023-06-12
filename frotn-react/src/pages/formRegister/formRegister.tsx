@@ -74,7 +74,7 @@ export const FormRegister = () => {
       onSubmit={onSubmit}
     >
       <Card sx={{ pb: 1 }}>
-        <Typography variant="h4">Reistrarse</Typography>
+        <Typography variant="h4">Registro</Typography>
         <div>
           <Box>
             <TextField
