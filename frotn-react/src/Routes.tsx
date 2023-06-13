@@ -3,6 +3,7 @@ import CreatePaciente from "./pages/createPaciente/formPaciente.page";
 import { FormRegister } from "./pages/formRegister/formRegister";
 import { Login } from "./pages/formLogin/formLogin";
 import Dashboard from "./pages/dashboard/dashboard";
+import { FormDoctor } from "./feature/Doctor/formDoctor/formDoctor";
 
 
 
@@ -15,7 +16,7 @@ export const AppRouter = () => {
         <Route path="/patientForm" element={<CreatePaciente/>} />
         <Route path="/" element={<Login/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-
+        <Route path="/doctor" element={<FormDoctor/>} />
         
       </Routes>
     );
