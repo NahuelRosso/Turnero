@@ -7,13 +7,44 @@ import { Card, Typography } from "@mui/material";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useForm } from "react-hook-form";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { IUser } from "../../models/users";
-import axios, { AxiosResponse } from "axios";
-import ApiService from "../../shared/services/userServices/userServices";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import ApiService from "../../../shared/services/userServices/userServices";
+import { IUser } from "../../../models/users";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
-export const FormRegister = () => {
+function stringToColor(string: string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name: string) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  };
+}
+
+
+export const FormDoctor = () => {
   const {
     register,
     handleSubmit,
@@ -73,7 +104,7 @@ export const FormRegister = () => {
       onSubmit={onSubmit}
     >
       <Card sx={{ pb: 1 }}>
-        <Typography variant="h4">Registro</Typography>
+        <Typography variant="h4">Registro Doctor</Typography>
         <div>
           <Box>
             <TextField
@@ -96,10 +127,65 @@ export const FormRegister = () => {
           </Box>
           <Box>
             <TextField
+              label="Surename"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("surname", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.name?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+            />
+          </Box>
+          <Box>
+            <TextField
               label="Phone"
               sx={{ m: 1, width: "25ch" }}
               type="tel"
               {...register("phone", {
+                required: true,
+
+                minLength: 2,
+              })}
+              {...(errors.phone?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.phone?.type === "minLenght" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+            />
+          </Box>
+          <Box>
+            <TextField
+              label="Tuition"
+              sx={{ m: 1, width: "25ch" }}
+              type="tel"
+              {...register("phone", {
+                required: true,
+
+                minLength: 2,
+              })}
+              {...(errors.phone?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.phone?.type === "minLenght" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+            />
+          </Box>
+          <Box>
+            <TextField
+              label="Dni"
+              sx={{ m: 1, width: "25ch" }}
+              type="tel"
+              {...register("id", {
                 required: true,
 
                 minLength: 2,
@@ -235,6 +321,12 @@ export const FormRegister = () => {
               Submit
             </Button>
           </Box>
+          <Stack direction="row" spacing={2}>
+            <Avatar {...stringAvatar('Mirko Numero')} />
+            <Avatar {...stringAvatar('Nahuel Rosso')} />
+            <Avatar {...stringAvatar('Facundo Allende')} />
+            <Avatar {...stringAvatar('Andres Santa')} />
+          </Stack>
         </div>
       </Card>
     </Box>
