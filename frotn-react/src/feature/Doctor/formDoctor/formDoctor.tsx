@@ -321,12 +321,7 @@ export const FormDoctor = () => {
               Submit
             </Button>
           </Box>
-          <Stack direction="row" spacing={2}>
-            <Avatar {...stringAvatar('Mirko Numero')} />
-            <Avatar {...stringAvatar('Nahuel Rosso')} />
-            <Avatar {...stringAvatar('Facundo Allende')} />
-            <Avatar {...stringAvatar('Andres Santa')} />
-          </Stack>
+          
         </div>
       </Card>
     </Box>
