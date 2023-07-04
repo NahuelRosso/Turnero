@@ -9,39 +9,13 @@ import { useForm } from "react-hook-form";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import ApiService from "../../../shared/services/userServices/userServices";
 import { IUser } from "../../../models/users";
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
+import { IDoctor } from "./model/doctor.model";
+import ApiServiceDoctor from "./service/servicesDoctor";
 
-function stringToColor(string: string) {
-  let hash = 0;
-  let i;
 
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-  }
 
-  let color = '#';
 
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.slice(-2);
-  }
-  /* eslint-enable no-bitwise */
-
-  return color;
-}
-
-function stringAvatar(name: string) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name),
-    },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-  };
-}
 
 
 export const FormDoctor = () => {
@@ -53,26 +27,23 @@ export const FormDoctor = () => {
   } = useForm<IUser>();
   const navigate = useNavigate();
 
-  const apiService = new ApiService('http://localhost:8081'); // Reemplaza con la URL correcta de tu backend en Java
+  const apiService = new ApiServiceDoctor('http://localhost:8081'); // Reemplaza con la URL correcta de tu backend en Java
 
   const onSubmit = handleSubmit((values) => {
-    const datos: IUser = {
-      HomeAddress: values.HomeAddress,
-      id: '',
-      name: values.name,
-      surname: '',
-      user: values.user,
-      password: values.password,
-      confirmPassword: values.confirmPassword,
-      role: '',
-      image: '',
-      address: '',
-      gender: '',
-      phone: values.phone,
+    const datos: IDoctor = {
+      name: "",
+      surname: "",
+      phone: 0,
+      adress: "",
+      email: "",
+      fecha_nacimineto: "",
+      sexo: "",
+      edad: 0,
+      tuition: ""
     };
 
     apiService
-      .createUser(datos)
+      .createDoctor(datos)
       .then((response: string) => {
         navigate("/")
         console.log(response);
@@ -144,7 +115,7 @@ export const FormDoctor = () => {
             <TextField
               label="Phone"
               sx={{ m: 1, width: "25ch" }}
-              type="tel"
+              type="text"
               {...register("phone", {
                 required: true,
 
@@ -162,9 +133,9 @@ export const FormDoctor = () => {
           </Box>
           <Box>
             <TextField
-              label="Tuition"
+              label="Matricula"
               sx={{ m: 1, width: "25ch" }}
-              type="tel"
+              type="text"
               {...register("phone", {
                 required: true,
 
@@ -184,7 +155,7 @@ export const FormDoctor = () => {
             <TextField
               label="Dni"
               sx={{ m: 1, width: "25ch" }}
-              type="tel"
+              type="text"
               {...register("id", {
                 required: true,
 
