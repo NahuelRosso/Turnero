@@ -31,15 +31,19 @@ export const FormDoctor = () => {
 
   const onSubmit = handleSubmit((values) => {
     const datos: IDoctor = {
-      name: "",
-      surname: "",
-      phone: 0,
-      adress: "",
-      email: "",
-      fecha_nacimineto: "",
-      sexo: "",
-      edad: 0,
-      tuition: ""
+      HomeAddress: values.HomeAddress,
+      id: '',
+      name: values.name,
+      surname: '',
+      user: values.user,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+      role: '',
+      image: '',
+      address: '',
+      gender: '',
+      phone: values.phone,
+      tuition: "" //solucionar problema
     };
 
     apiService
@@ -75,10 +79,10 @@ export const FormDoctor = () => {
       onSubmit={onSubmit}
     >
       <Card sx={{ pb: 1 }}>
-        <Typography variant="h4">Registro Doctor</Typography>
+        <Typography variant="h4">Register Doctor</Typography>
         <div>
           <Box>
-            <TextField
+            <TextField //Nombre
               label="Name"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -97,15 +101,15 @@ export const FormDoctor = () => {
             />
           </Box>
           <Box>
-            <TextField
-              label="Surename"
+            <TextField //Apellido
+              label="Surname"
               sx={{ m: 1, width: "25ch" }}
               type="text"
               {...register("surname", {
                 required: true,
                 minLength: 2,
               })}
-              {...(errors.name?.type === "required" && {
+              {...(errors.surname?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
@@ -133,27 +137,27 @@ export const FormDoctor = () => {
           </Box>
           <Box>
             <TextField
-              label="Matricula"
+              /*label="Tuition"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("phone", {
+              {...register("tuition", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.phone?.type === "required" && {
+              {...(errors.tuition?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.phone?.type === "minLenght" && {
+              {...(errors.tuition?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
-              })}
+              })}*/
             />
           </Box>
           <Box>
             <TextField
-              label="Dni"
+              label="DNI"
               sx={{ m: 1, width: "25ch" }}
               type="text"
               {...register("id", {
@@ -161,11 +165,11 @@ export const FormDoctor = () => {
 
                 minLength: 2,
               })}
-              {...(errors.phone?.type === "required" && {
+              {...(errors.id?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.phone?.type === "minLenght" && {
+              {...(errors.id?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
