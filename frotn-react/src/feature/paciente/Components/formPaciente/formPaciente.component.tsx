@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Grid, Box } from '@mui/material';
-import { IPaciente } from './model/paciente.model';
+import { IPaciente } from '../../model/paciente.model';
 
 export const PatientForm: React.FC = () => {
     const [formData, setFormData] = useState({
