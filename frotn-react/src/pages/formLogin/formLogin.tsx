@@ -28,8 +28,14 @@ export const Login= () => {
     if (!loginData.user) {
       setUserError("Ingrese su usuario");
     }
+    else {
+      setUserError(""); // Limpiar el mensaje de error del usuario si es válido
+    }
     if (!loginData.password) {
       setPasswordError("Ingrese su contraseña");
+    } 
+    else {
+      setPasswordError(""); // Limpiar el mensaje de error de la contraseña si es válida
     }
 
     // Si no hay mensajes de error, intentar iniciar sesión
@@ -62,7 +68,7 @@ export const Login= () => {
         <Grid item>
           <Paper sx={{padding:"1.2em", borderRadius:"0.5em"}}>
             <Typography sx={{mt:1, mb:1 }} variant="h4">
-              Iniciar sesion
+              Log In
               </Typography>
               {userError && ( // Mostrar el mensaje de error del usuario si existe
               <Typography sx={{ color: "red", mt: 1, mb: 1 }}>{userError}</Typography>
@@ -74,8 +80,8 @@ export const Login= () => {
               <TextField 
               name="user"
               margin= "normal"
-              type="text" 
-              fullWidth label="Email:" 
+              type="email" 
+              fullWidth label="Email" 
               sx={{mt: 1.5, mb: 1.5}}
               required
               onChange={handleInputChange}
@@ -85,8 +91,8 @@ export const Login= () => {
               <TextField 
               name="password"
               margin="normal"
-              type="Password" 
-              fullWidth label="contraseña:" 
+              type="password" 
+              fullWidth label="Password" 
               sx={{mt: 0.5, mb: 0.5}}
               required
               onChange={handleInputChange}
@@ -97,7 +103,7 @@ export const Login= () => {
               type="submit" 
               variant="contained"
               sx={{mt:1.5}}>
-                Iniciar sesion
+                Access
               </Button> 
 
               <Button 
@@ -106,7 +112,7 @@ export const Login= () => {
               variant="contained" 
               sx={{mt:1.5, mb: 1}}
               href="/register">
-                Registrarme</Button> 
+                Register</Button> 
             </Box> 
           </Paper>
         </Grid>

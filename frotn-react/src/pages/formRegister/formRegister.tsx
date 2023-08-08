@@ -73,10 +73,10 @@ export const FormRegister = () => {
       onSubmit={onSubmit}
     >
       <Card sx={{ pb: 1 }}>
-        <Typography variant="h4">Registro</Typography>
+        <Typography variant="h4">Register</Typography>
         <div>
           <Box>
-            <TextField
+            <TextField //Nombre
               label="Name"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -90,6 +90,21 @@ export const FormRegister = () => {
               })}
               {...(errors.name?.type === "minLength" && {
                 helperText: "El nombre es demaciado corto",
+                error: true,
+              })}
+            />
+          </Box>
+          <Box>
+            <TextField
+              label="Surname"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("surname", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.name?.type === "required" && {
+                helperText: "Campo Obligatorio",
                 error: true,
               })}
             />

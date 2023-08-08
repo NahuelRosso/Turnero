@@ -15,4 +15,3 @@ export interface IUser {
   
   export type ILoginUser = Pick<IUser, "user" | "password">;
   
-  
