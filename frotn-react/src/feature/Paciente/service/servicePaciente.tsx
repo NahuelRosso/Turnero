@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { IPaciente } from "../formPaciente/model/paciente.model";
+import { IPaciente } from "../model/paciente.model";
+
 
 class ApiServicePaciente {
     private baseUrl: string;

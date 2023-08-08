@@ -4,7 +4,7 @@ import { FormRegister } from "./pages/formRegister/formRegister";
 import { Login } from "./pages/formLogin/formLogin";
 import Dashboard from "./pages/dashboard/dashboard";
 import { FormDoctor } from "./feature/Doctor/formDoctor/formDoctor";
-import  { PatientForm } from './components/formPaciente/formPaciente.component';
+import  { PatientForm } from './feature/Paciente/components/formPaciente/formPaciente.component';
 
 
 
