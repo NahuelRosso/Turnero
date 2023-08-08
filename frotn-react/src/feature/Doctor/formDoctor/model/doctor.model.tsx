@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IDoctor {
     HomeAddress: string;
     id: string;
     name: string;
@@ -11,7 +11,6 @@ export interface IUser {
     address: string;
     gender: string;
     phone: string;
-  }
-  
-  export type ILoginUser = Pick<IUser, "user" | "password">;
-  
+    tuition: string;
+    
+}

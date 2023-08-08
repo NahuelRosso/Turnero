@@ -7,13 +7,18 @@ import { Card, Typography } from "@mui/material";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useForm } from "react-hook-form";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { IUser } from "../../models/users";
-import axios, { AxiosResponse } from "axios";
-import ApiService from "../../shared/services/userServices/userServices";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { IUser } from "../../../models/users";
+import { IDoctor } from "./model/doctor.model";
+import ApiServiceDoctor from "./service/servicesDoctor";
 
-export const FormRegister = () => {
+
+
+
+
+
+export const FormDoctor = () => {
   const {
     register,
     handleSubmit,
@@ -22,10 +27,10 @@ export const FormRegister = () => {
   } = useForm<IUser>();
   const navigate = useNavigate();
 
-  const apiService = new ApiService('http://localhost:8081'); // Reemplaza con la URL correcta de tu backend en Java
+  const apiService = new ApiServiceDoctor('http://localhost:8081'); // Reemplaza con la URL correcta de tu backend en Java
 
   const onSubmit = handleSubmit((values) => {
-    const datos: IUser = {
+    const datos: IDoctor = {
       HomeAddress: values.HomeAddress,
       id: '',
       name: values.name,
@@ -38,10 +43,11 @@ export const FormRegister = () => {
       address: '',
       gender: '',
       phone: values.phone,
+      tuition: "" //solucionar problema
     };
 
     apiService
-      .createUser(datos)
+      .createDoctor(datos)
       .then((response: string) => {
         navigate("/")
         console.log(response);
@@ -73,7 +79,7 @@ export const FormRegister = () => {
       onSubmit={onSubmit}
     >
       <Card sx={{ pb: 1 }}>
-        <Typography variant="h4">Register</Typography>
+        <Typography variant="h4">Register Doctor</Typography>
         <div>
           <Box>
             <TextField //Nombre
@@ -95,7 +101,7 @@ export const FormRegister = () => {
             />
           </Box>
           <Box>
-            <TextField
+            <TextField //Apellido
               label="Surname"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -103,7 +109,7 @@ export const FormRegister = () => {
                 required: true,
                 minLength: 2,
               })}
-              {...(errors.name?.type === "required" && {
+              {...(errors.surname?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
@@ -113,7 +119,7 @@ export const FormRegister = () => {
             <TextField
               label="Phone"
               sx={{ m: 1, width: "25ch" }}
-              type="tel"
+              type="text"
               {...register("phone", {
                 required: true,
 
@@ -124,6 +130,46 @@ export const FormRegister = () => {
                 error: true,
               })}
               {...(errors.phone?.type === "minLenght" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+            />
+          </Box>
+          <Box>
+            <TextField
+              /*label="Tuition"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("tuition", {
+                required: true,
+
+                minLength: 2,
+              })}
+              {...(errors.tuition?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.tuition?.type === "minLenght" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}*/
+            />
+          </Box>
+          <Box>
+            <TextField
+              label="DNI"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("id", {
+                required: true,
+
+                minLength: 2,
+              })}
+              {...(errors.id?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.id?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
@@ -250,6 +296,7 @@ export const FormRegister = () => {
               Submit
             </Button>
           </Box>
+          
         </div>
       </Card>
     </Box>

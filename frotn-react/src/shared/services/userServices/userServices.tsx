@@ -1,9 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { ILoginUser } from '../../../models/users';
-interface LoginResponse {
-  token: string;
-  user: string;
-}
+import { ILoginUser, IUser } from '../../../models/users';
 class ApiService {
   private baseUrl: string;
 
@@ -11,7 +7,7 @@ class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  public async createUser(usuario: any): Promise<any> {
+  public async createUser(usuario: IUser): Promise<any> {
     try {
       const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/registry`, usuario);
       return response.data;
