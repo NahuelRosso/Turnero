@@ -26,17 +26,17 @@ export const FormRegister = () => {
 
   const onSubmit = handleSubmit((values) => {
     const datos: IUser = {
-      HomeAddress: values.HomeAddress,
+      
       id: '',
       name: values.name,
-      surname: '',
-      user: values.user,
+      surname: values.surname,
+      email: values.email,
       password: values.password,
       confirmPassword: values.confirmPassword,
-      role: '',
-      image: '',
-      address: '',
-      gender: '',
+      role: values.role,
+      image: "",
+      address: values.address,
+      gender: values.gender,
       phone: values.phone,
     };
 
@@ -131,19 +131,19 @@ export const FormRegister = () => {
           </Box>
           <Box>
             <TextField
-              label="Home address"
+              label="Address"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("HomeAddress", {
+              {...register("address", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.HomeAddress?.type === "required" && {
+              {...(errors.address?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.HomeAddress?.type === "minLength" && {
+              {...(errors.address?.type === "minLength" && {
                 helperText: "La direccion es demaciada corta",
                 error: true,
               })}
@@ -154,16 +154,16 @@ export const FormRegister = () => {
               label="Email"
               sx={{ m: 1, width: "25ch" }}
               type="email"
-              {...register("user", {
+              {...register("email", {
                 required: true,
                 pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                 minLength: 2,
               })}
-              {...(errors.user?.type === "required" && {
+              {...(errors.email?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.user?.type === "pattern" && {
+              {...(errors.email?.type === "pattern" && {
                 helperText: "Ingrese un email válido",
                 error: true,
               })}

@@ -9,7 +9,7 @@ import { ILoginUser } from "../../models/users";
 
 export const Login= () => {
   const [loginData, setLoginData] = useState<ILoginUser>({
-    user: "",
+    email: "",
     password: "",
   });
   const [userError, setUserError] = useState<string>(""); // Estado para manejar el mensaje de error del usuario
@@ -25,7 +25,7 @@ export const Login= () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // Validar usuario y contraseña antes de enviar la solicitud
-    if (!loginData.user) {
+    if (!loginData.email) {
       setUserError("Ingrese su usuario");
     }
     else {
@@ -78,7 +78,7 @@ export const Login= () => {
             )}
             <Box component="form" onSubmit={handleSubmit}>
               <TextField 
-              name="user"
+              name="email"
               margin= "normal"
               type="email" 
               fullWidth label="Email" 

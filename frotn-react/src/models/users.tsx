@@ -1,9 +1,7 @@
 export interface IUser {
-    HomeAddress: string;
     id: string;
     name: string;
     surname: string;
-    user: string;
     password: string;
     confirmPassword: string;
     role: string;
@@ -11,7 +9,8 @@ export interface IUser {
     address: string;
     gender: string;
     phone: string;
+    email:string;
   }
   
-  export type ILoginUser = Pick<IUser, "user" | "password">;
+  export type ILoginUser = Pick<IUser, "email" | "password">;
   

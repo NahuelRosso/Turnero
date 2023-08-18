@@ -3,8 +3,12 @@ import CreatePaciente from "./pages/createPaciente/formPaciente.page";
 import { FormRegister } from "./pages/formRegister/formRegister";
 import { Login } from "./pages/formLogin/formLogin";
 import Dashboard from "./pages/dashboard/dashboard";
-import { FormDoctor } from "./feature/Doctor/formDoctor/formDoctor";
 import  { PatientForm } from './feature/Paciente/components/formPaciente/formPaciente.component';
+import CreateDoctor from "./pages/createDoctor/createDoctor";
+import Item from "./feature/Doctor/components/itemDoctor/itemDoctor";
+import ListDoctor from "./feature/Doctor/components/listDoctor/listDoctor";
+import{ ListItems } from "./shared/Components/list-item/listItem";
+import { ReactNode } from "react";
 
 
 
@@ -16,7 +20,14 @@ export const AppRouter = () => {
         <Route path="/patientForm" element={<PatientForm/>} />
         <Route path="/" element={<Login/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/doctor" element={<FormDoctor/>} />
+        <Route path="/doctor" element={<CreateDoctor/>} />
+        <Route path="/item" element={<Item itemName={""} quantity={0}/>} />
+        <Route path="/listDoctor" element={<ListItems items={[]} renderItem={function (item: any): ReactNode {
+          throw new Error("Function not implemented.");
+        } } handleItemClick={function (item: any): void {
+          throw new Error("Function not implemented.");
+        } }/>} />
+
         
       </Routes>
     );

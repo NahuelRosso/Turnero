@@ -9,9 +9,8 @@ import { useForm } from "react-hook-form";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { IUser } from "../../../models/users";
-import { IDoctor } from "./model/doctor.model";
-import ApiServiceDoctor from "./service/servicesDoctor";
+import { IDoctor } from "../../model/doctor.model";
+import ApiServiceDoctor from "../../service/servicesDoctor";
 
 
 
@@ -24,27 +23,28 @@ export const FormDoctor = () => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<IUser>();
+  } = useForm<IDoctor>();
   const navigate = useNavigate();
 
   const apiService = new ApiServiceDoctor('http://localhost:8081'); // Reemplaza con la URL correcta de tu backend en Java
 
   const onSubmit = handleSubmit((values) => {
     const datos: IDoctor = {
-      HomeAddress: values.HomeAddress,
       id: '',
       name: values.name,
       surname: '',
-      user: values.user,
       password: values.password,
       confirmPassword: values.confirmPassword,
-      role: '',
+      specialty: '',
       image: '',
       address: '',
       gender: '',
+      email: values.email,
       phone: values.phone,
-      tuition: "" //solucionar problema
+      tuition: values.tuition,
+      dni:values.dni,
     };
+    console.log(values)
 
     apiService
       .createDoctor(datos)
@@ -137,7 +137,7 @@ export const FormDoctor = () => {
           </Box>
           <Box>
             <TextField
-              /*label="Tuition"
+              label="Tuition"
               sx={{ m: 1, width: "25ch" }}
               type="text"
               {...register("tuition", {
@@ -152,7 +152,7 @@ export const FormDoctor = () => {
               {...(errors.tuition?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
-              })}*/
+              })}
             />
           </Box>
           <Box>
@@ -160,16 +160,16 @@ export const FormDoctor = () => {
               label="DNI"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("id", {
+              {...register("dni", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.id?.type === "required" && {
+              {...(errors.dni?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.id?.type === "minLenght" && {
+              {...(errors.dni?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
@@ -177,44 +177,25 @@ export const FormDoctor = () => {
           </Box>
           <Box>
             <TextField
-              label="Home address"
+              label="Address"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("HomeAddress", {
+              {...register("address", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.HomeAddress?.type === "required" && {
+              {...(errors.address?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.HomeAddress?.type === "minLength" && {
+              {...(errors.address?.type === "minLength" && {
                 helperText: "La direccion es demaciada corta",
                 error: true,
               })}
             />
           </Box>
-          <Box>
-            <TextField
-              label="Email"
-              sx={{ m: 1, width: "25ch" }}
-              type="email"
-              {...register("user", {
-                required: true,
-                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                minLength: 2,
-              })}
-              {...(errors.user?.type === "required" && {
-                helperText: "Campo Obligatorio",
-                error: true,
-              })}
-              {...(errors.user?.type === "pattern" && {
-                helperText: "Ingrese un email válido",
-                error: true,
-              })}
-            />
-          </Box>
+          
           <Box>
             <TextField
               sx={{ m: 1, width: "25ch" }}
