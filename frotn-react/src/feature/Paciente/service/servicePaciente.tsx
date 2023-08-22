@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { IPaciente } from "../model/Newpaciente.model";
+import { IPaciente } from "../model/paciente.model";
+
 
 
 class ApiServicePaciente {
