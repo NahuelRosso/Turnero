@@ -17,10 +17,10 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<FormRegister/>} />
-        <Route path="/patientForm" element={<PatientForm/>} />
+        <Route path="/createPaciente" element={<CreatePaciente/>} />
         <Route path="/" element={<Login/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/doctor" element={<CreateDoctor/>} />
+        <Route path="/createDoctor" element={<CreateDoctor/>} />
         <Route path="/item" element={<Item itemName={""} quantity={0}/>} />
         <Route path="/listDoctor" element={<ListItems items={[]} renderItem={function (item: any): ReactNode {
           throw new Error("Function not implemented.");

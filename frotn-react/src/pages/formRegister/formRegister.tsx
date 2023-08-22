@@ -26,8 +26,6 @@ export const FormRegister = () => {
 
   const onSubmit = handleSubmit((values) => {
     const datos: IUser = {
-      
-      id: '',
       name: values.name,
       surname: values.surname,
       email: values.email,
@@ -38,6 +36,7 @@ export const FormRegister = () => {
       address: values.address,
       gender: values.gender,
       phone: values.phone,
+      id: ""
     };
 
     apiService
@@ -45,6 +44,7 @@ export const FormRegister = () => {
       .then((response: string) => {
         navigate("/")
         console.log(response);
+        console.log(datos)
       })
       .catch((error: Error) => {
         console.error(error);
@@ -100,6 +100,21 @@ export const FormRegister = () => {
               sx={{ m: 1, width: "25ch" }}
               type="text"
               {...register("surname", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.name?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+            />
+          </Box>
+          <Box>
+            <TextField
+              label="Rol"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("role", {
                 required: true,
                 minLength: 2,
               })}

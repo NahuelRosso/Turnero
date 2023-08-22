@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { IPaciente } from "../model/paciente.model";
+import { IPaciente } from "../model/Newpaciente.model";
 
 
 class ApiServicePaciente {
@@ -11,7 +11,7 @@ class ApiServicePaciente {
 
 public async createPaciente(doctor: IPaciente): Promise<any> {
     try {
-      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/creatDoctor`, doctor);
+      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/registryPaciente`, doctor);
       return response.data;
     } catch (error) {
       throw new Error((error as AxiosError).message);

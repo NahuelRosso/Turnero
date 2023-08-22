@@ -12,6 +12,7 @@ class ApiService {
       const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/registry`, usuario);
       return response.data;
     } catch (error) {
+      console.log(error)
       throw new Error((error as AxiosError).message);
     }
   }
