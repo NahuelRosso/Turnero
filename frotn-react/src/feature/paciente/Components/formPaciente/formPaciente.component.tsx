@@ -12,7 +12,7 @@ import axios, { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { IPaciente } from "../../model/paciente.model";
-import ApiServicePaciente from "../../service/ServicePaciente";
+import ApiServicePaciente from "../../service/servicePaciente";
 
 export const PatientForm = () => {
   const {
