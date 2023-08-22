@@ -11,8 +11,8 @@ import axios, { AxiosResponse } from "axios";
 
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { IPaciente } from "../../model/Newpaciente.model";
-import ApiServicePaciente from "../../service/servicePaciente";
+import { IPaciente } from "../../model/paciente.model";
+import ApiServicePaciente from "../../service/ServicePaciente";
 
 export const PatientForm = () => {
   const {
