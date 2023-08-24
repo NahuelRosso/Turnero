@@ -16,6 +16,7 @@ export const Login = () => {
   const [loginData, setLoginData] = useState<ILoginUser>({
     email: "",
     password: "",
+   
   });
   const [userError, setUserError] = useState<string>(""); // Estado para manejar el mensaje de error del usuario
   const [passwordError, setPasswordError] = useState<string>(""); // Estado para manejar el mensaje de error de la contraseña

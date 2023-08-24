@@ -1,6 +1,8 @@
 
 import React from 'react'
-import { PatientForm } from '../../feature/Paciente/components/formPaciente/FormPaciente.component'
+import { PatientForm } from '../../feature/Paciente/components/formPaciente/formPaciente.component'
+
+
 
 
 export default function CreatePaciente() {

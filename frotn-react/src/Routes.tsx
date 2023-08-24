@@ -3,7 +3,6 @@ import CreatePaciente from "./pages/createPaciente/formPaciente.page";
 import { FormRegister } from "./pages/formRegister/formRegister";
 import { Login } from "./pages/formLogin/formLogin";
 import Dashboard from "./pages/dashboard/dashboard";
-import  { PatientForm } from './feature/Paciente/components/formPaciente/FormPaciente.component';
 import CreateDoctor from "./pages/createDoctor/createDoctor";
 import Item from "./feature/Doctor/components/itemDoctor/itemDoctor";
 import ListDoctor from "./feature/Doctor/components/listDoctor/listDoctor";
@@ -27,6 +26,7 @@ export const AppRouter = () => {
         } } handleItemClick={function (item: any): void {
           throw new Error("Function not implemented.");
         } }/>} />
+        <Route path="/createPaciente" element={<CreatePaciente/>} />
 
         
       </Routes>
