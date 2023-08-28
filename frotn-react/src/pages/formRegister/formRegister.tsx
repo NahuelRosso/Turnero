@@ -36,7 +36,7 @@ export const FormRegister = () => {
       address: values.address,
       gender: values.gender,
       phone: values.phone,
-      id: ""
+     id:""
     };
 
     apiService
