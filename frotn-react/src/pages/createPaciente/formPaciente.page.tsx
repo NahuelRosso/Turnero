@@ -5,6 +5,7 @@ import { PatientForm } from '../../feature/Paciente/components/formPaciente/form
 
 
 
+
 export default function CreatePaciente() {
   return (
     <div>
