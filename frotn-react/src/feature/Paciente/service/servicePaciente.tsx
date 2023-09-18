@@ -10,9 +10,9 @@ class ApiServicePaciente {
       this.baseUrl = baseUrl;
     }
 
-public async createPaciente(doctor: IPaciente): Promise<any> {
+public async createPaciente(paciente: IPaciente): Promise<any> {
     try {
-      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/registryPaciente`, doctor);
+      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/registryPaciente`, paciente);
       return response.data;
     } catch (error) {
       throw new Error((error as AxiosError).message);

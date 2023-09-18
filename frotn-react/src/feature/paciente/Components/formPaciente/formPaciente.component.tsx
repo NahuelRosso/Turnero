@@ -4,9 +4,9 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Card, Typography } from "@mui/material";
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useForm } from "react-hook-form";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import axios, { AxiosResponse } from "axios";
 
 import { useNavigate } from "react-router-dom";
@@ -23,29 +23,31 @@ export const PatientForm = () => {
   } = useForm<IPaciente>();
   const navigate = useNavigate();
 
-  const apiService = new ApiServicePaciente('http://localhost:8081'); // Reemplaza con la URL correcta de tu backend en Java
+  const apiService = new ApiServicePaciente("http://localhost:8081"); // Reemplaza con la URL correcta de tu backend en Java
 
   const onSubmit = handleSubmit((values) => {
     const datos: IPaciente = {
-      HomeAddress: values.HomeAddress,
-      id: '',
+      codeSocialWork: values.codeSocialWork,
+      id: "",
       name: values.name,
-      surname: '',
+      surname: values.surname,
       user: values.user,
       password: values.password,
       confirmPassword: values.confirmPassword,
-      role: '',
-      image: '',
-      address: '',
-      gender: '',
+      role: values.role,
+      image: "",
+      address: values.address,
+      gender: values.gender,
       phone: values.phone,
-      socialWork: '', //solucionar problema
+      socialWork: values.socialWork,
+      email: values.email,
+      dni: values.dni,
     };
 
     apiService
       .createPaciente(datos)
       .then((response: string) => {
-        navigate("/")
+        // navigate("/listPaciente");
         console.log(response);
       })
       .catch((error: Error) => {
@@ -133,7 +135,6 @@ export const PatientForm = () => {
           </Box>
           <Box>
             <TextField
-            /*
               label="Social Work"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -149,7 +150,7 @@ export const PatientForm = () => {
               {...(errors.socialWork?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
-              })}*/
+              })}
             />
           </Box>
           <Box>
@@ -157,16 +158,16 @@ export const PatientForm = () => {
               label="DNI"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("id", {
+              {...register("dni", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.id?.type === "required" && {
+              {...(errors.dni?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.id?.type === "minLenght" && {
+              {...(errors.dni?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
@@ -174,19 +175,19 @@ export const PatientForm = () => {
           </Box>
           <Box>
             <TextField
-              label="Home address"
+              label="Code Social Work"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("HomeAddress", {
+              {...register("codeSocialWork", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.HomeAddress?.type === "required" && {
+              {...(errors.codeSocialWork?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.HomeAddress?.type === "minLength" && {
+              {...(errors.codeSocialWork?.type === "minLength" && {
                 helperText: "La direccion es demaciada corta",
                 error: true,
               })}
@@ -197,16 +198,36 @@ export const PatientForm = () => {
               label="Email"
               sx={{ m: 1, width: "25ch" }}
               type="email"
-              {...register("user", {
+              {...register("email", {
                 required: true,
                 pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
                 minLength: 2,
               })}
-              {...(errors.user?.type === "required" && {
+              {...(errors.email?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.user?.type === "pattern" && {
+              {...(errors.email?.type === "pattern" && {
+                helperText: "Ingrese un email válido",
+                error: true,
+              })}
+            />
+          </Box>
+          <Box>
+            <TextField
+              label="Rol"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("role", {
+                required: true,
+
+                minLength: 2,
+              })}
+              {...(errors.role?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.role?.type === "pattern" && {
                 helperText: "Ingrese un email válido",
                 error: true,
               })}
@@ -219,7 +240,7 @@ export const PatientForm = () => {
               label="Password"
               {...register("password", {
                 required: true,
-      
+
                 minLength: 2,
               })}
               {...(errors.password?.type === "required" && {
@@ -231,7 +252,8 @@ export const PatientForm = () => {
                 error: true,
               })}
               {...(errors.password?.type === "pattern" && {
-                helperText: "La contraseña debe tener minimo 8 caracteres,minuscula, mayuscula, número y caracter especial",
+                helperText:
+                  "La contraseña debe tener minimo 8 caracteres,minuscula, mayuscula, número y caracter especial",
                 error: true,
               })}
               InputProps={{
@@ -243,7 +265,11 @@ export const PatientForm = () => {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -277,7 +303,11 @@ export const PatientForm = () => {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -285,20 +315,12 @@ export const PatientForm = () => {
             />
           </Box>
           <Box>
-            <Button
-              onClick={onSubmit}
-              
-              variant="contained"
-            >
+            <Button onClick={onSubmit} variant="contained">
               Submit
             </Button>
           </Box>
-          
         </div>
       </Card>
     </Box>
-
-  
-
-    );
+  );
 };

@@ -1,5 +1,4 @@
 export interface IPaciente{
-    HomeAddress: string;
     id: string;
     name: string;
     surname: string;
@@ -12,4 +11,7 @@ export interface IPaciente{
     gender: string;
     phone: string;
     socialWork: string;
+    codeSocialWork:string;
+    email:string,
+    dni:string;
 }
