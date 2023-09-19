@@ -27,25 +27,24 @@ export const PatientForm = () => {
 
   const onSubmit = handleSubmit((values) => {
     const datos: IPaciente = {
-      HomeAddress: values.HomeAddress,
       id: '',
       name: values.name,
-      surname: '',
+      surname: values.surname,
       user: values.user,
       password: values.password,
       confirmPassword: values.confirmPassword,
-      role: '',
+      role: values.role,
       image: '',
-      address: '',
-      gender: '',
+      address: values.address,
+      gender: values.gender,
       phone: values.phone,
-      socialWork: '', //solucionar problema
+      socialWork: values.socialWork, //solucionar problema
     };
 
     apiService
       .createPaciente(datos)
       .then((response: string) => {
-        navigate("/")
+        // navigate("/")
         console.log(response);
       })
       .catch((error: Error) => {
@@ -133,7 +132,6 @@ export const PatientForm = () => {
           </Box>
           <Box>
             <TextField
-            /*
               label="Social Work"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -149,7 +147,7 @@ export const PatientForm = () => {
               {...(errors.socialWork?.type === "minLenght" && {
                 helperText: "Campo Obligatorio",
                 error: true,
-              })}*/
+              })}
             />
           </Box>
           <Box>
@@ -177,16 +175,16 @@ export const PatientForm = () => {
               label="Home address"
               sx={{ m: 1, width: "25ch" }}
               type="text"
-              {...register("HomeAddress", {
+              {...register("address", {
                 required: true,
 
                 minLength: 2,
               })}
-              {...(errors.HomeAddress?.type === "required" && {
+              {...(errors.address?.type === "required" && {
                 helperText: "Campo Obligatorio",
                 error: true,
               })}
-              {...(errors.HomeAddress?.type === "minLength" && {
+              {...(errors.address?.type === "minLength" && {
                 helperText: "La direccion es demaciada corta",
                 error: true,
               })}
