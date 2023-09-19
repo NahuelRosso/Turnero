@@ -1,18 +1,14 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SettingsIcon from '@mui/icons-material/Settings';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Alert, Avatar, Menu, MenuItem } from '@mui/material';
+import { Alert, Menu, MenuItem } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import TemporaryDrawer from './Drawer';
+import { useNavigate } from 'react-router-dom';
 
 const navItems = ['Inicio', 'Turno', 'Historial Clínica', 'Crear Registro', 'Profesionales', 'Administradores', 'Informaciones'];
 
@@ -28,13 +24,14 @@ export default function NavBar() {
   const handleMenuClose = () => {
     setAnchorEl1(null);
   };
-
+  const navigate = useNavigate();
   //usuario
   const [anchorEl2, setAnchorEl2] = useState(null);
   const handleUsuarioClick = (event: any) => {
     setAnchorEl2(event.currentTarget);
   };
   const handleUsuarioClose = () => {
+    navigate("/");
     setAnchorEl2(null);
   };
 

@@ -4,6 +4,9 @@ import { IPaciente } from "../model/paciente.model";
 
 
 class ApiServicePaciente {
+    static getAllPaciente() {
+        throw new Error("Method not implemented.");
+    }
     private baseUrl: string;
   
     constructor(baseUrl: string) {
@@ -18,9 +21,9 @@ public async createPaciente(paciente: IPaciente): Promise<any> {
       throw new Error((error as AxiosError).message);
     }
   }
-  public async getAllDoctor(): Promise<any> {
+  public async getAllPaciente(): Promise<any> {
     try {
-      const response: AxiosResponse<any> = await axios.get(`${this.baseUrl}/getAll`);
+      const response: AxiosResponse<any> = await axios.get(`${this.baseUrl}/getAllPaciente`);
       return response.data;
     } catch (error) {
       throw new Error((error as AxiosError).message);

@@ -1,5 +1,4 @@
 export interface IPaciente{
-    HomeAddress: string;
     id: string;
     name: string;
     surname: string;

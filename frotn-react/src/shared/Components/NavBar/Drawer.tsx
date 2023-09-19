@@ -10,6 +10,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -68,7 +70,12 @@ export default function TemporaryDrawer() {
     <div>
       {(['left'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <IconButton // Agregar el botón de hamburguesa aquí
+            onClick={toggleDrawer(anchor, true)}
+            sx={{ mr: 2, color:"white" }} // Ajusta los estilos según tus preferencias
+          >
+            <MenuIcon />
+          </IconButton>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
