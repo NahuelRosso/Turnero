@@ -1,6 +1,7 @@
+import PatientForm from "../../feature/Paciente/components/formPaciente/formPaciente";
 
-import React from 'react'
-import { PatientForm } from '../../feature/Paciente/components/formPaciente/formPaciente.component'
+
+
 
 
 
