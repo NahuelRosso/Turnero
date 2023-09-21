@@ -9,7 +9,7 @@ export default function Dashboard() {
     <div>
       <NavBar></NavBar>
       <Typography variant="h4" >
-        Panel de Control
+        Panel de Inicio
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>
@@ -34,6 +34,18 @@ export default function Dashboard() {
               href='/Pacientes'
             >
               Pacientes
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Link> {/* Ajustar la ruta según tu enrutamiento */}
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              href='/createPaciente'
+            >
+              Cargar Paciete
             </Button>
           </Link>
         </Grid>
