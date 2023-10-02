@@ -3,9 +3,7 @@ import CreatePaciente from "./pages/createPaciente/formPaciente.page";
 import { FormRegister } from "./pages/formRegister/formRegister";
 import { Login } from "./pages/formLogin/formLogin";
 import Dashboard from "./pages/dashboard/dashboard";
-
-
-
+import CreateDoctor from "./pages/createDoctor/formDoctor.page";
 
 export const AppRouter = () => {
     return (
@@ -15,7 +13,7 @@ export const AppRouter = () => {
         <Route path="/patientForm" element={<CreatePaciente/>} />
         <Route path="/" element={<Login/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-
+        <Route path="/doctorForm" element={<CreateDoctor/>} />
         
       </Routes>
     );
