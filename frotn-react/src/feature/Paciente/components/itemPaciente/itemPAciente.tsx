@@ -10,7 +10,8 @@ import {
   ListItemText,
 } from "@mui/material";
 import { MouseEventHandler, useState } from "react";
-import { IPaciente } from "../model/paciente";
+import { IPaciente } from "../../model/paciente";
+
 
 type Props = {
   paciente: IPaciente;

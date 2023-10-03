@@ -5,10 +5,10 @@ import { Login } from "./pages/formLogin/formLogin";
 import Dashboard from "./pages/dashboard/dashboard";
 import CreateDoctor from "./pages/createDoctor/createDoctor";
 import Item from "./feature/Doctor/components/itemDoctor/itemDoctor";
-import ListDoctor from "./feature/Doctor/components/listDoctor/listDoctor";
 import{ ListItems } from "./shared/Components/list-item/listItem";
 import { ReactNode } from "react";
 import { ListPaciente } from "./feature/Paciente/components/listPaciente/listPaciente";
+import FormTurnoPage from "./pages/crearTurno/formTurno.page";
 
 
 
@@ -29,6 +29,7 @@ export const AppRouter = () => {
         } }/>} />
         <Route path="/createPaciente" element={<CreatePaciente/>} />
         <Route path="/Pacientes" element={<ListPaciente/>} />
+        <Route path="/turno" element={<FormTurnoPage/>} />
 
         
       </Routes>

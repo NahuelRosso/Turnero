@@ -13,8 +13,9 @@ import {
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ApiServicePaciente from "../../service/servicePaciente";
-import { IPaciente } from "../model/paciente";
+
 import { useForm } from "react-hook-form";
+import { IPaciente } from "../../model/paciente";
 
 
 export default function PatientForm() {
@@ -41,7 +42,7 @@ export default function PatientForm() {
       address: values.address,
       gender: values.gender,
       phone: values.phone,
-      socialWork: values.socialWork, //solucionar problema
+      socialWork: values.socialWork, 
     };
 
     apiService
