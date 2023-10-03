@@ -9,6 +9,7 @@ import{ ListItems } from "./shared/Components/list-item/listItem";
 import { ReactNode } from "react";
 import { ListPaciente } from "./feature/Paciente/components/listPaciente/listPaciente";
 import FormTurnoPage from "./pages/crearTurno/formTurno.page";
+import HistorialClinicoForm from "./feature/HistorialClinico/components/formHistorialClinico/formHistorialClinico";
 
 
 
@@ -30,6 +31,7 @@ export const AppRouter = () => {
         <Route path="/createPaciente" element={<CreatePaciente/>} />
         <Route path="/Pacientes" element={<ListPaciente/>} />
         <Route path="/turno" element={<FormTurnoPage/>} />
+        <Route path="/historialClinico" element={<HistorialClinicoForm/>} />
 
         
       </Routes>
