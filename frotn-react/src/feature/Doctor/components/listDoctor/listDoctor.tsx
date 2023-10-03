@@ -28,7 +28,6 @@ export const ListDoctor = () => {
 
     fetchDoctor(); // Llama a la función para obtener los doctores cuando el componente se monta
   }, []);
-
   return (
     <>
       {!loading ? (
