@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { IPaciente } from "../components/model/paciente";
+import { IPaciente } from "../model/paciente";
+
 
 
 

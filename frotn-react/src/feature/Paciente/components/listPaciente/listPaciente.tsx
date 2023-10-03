@@ -3,7 +3,8 @@ import ApiServicePaciente from "../../service/servicePaciente";
 
 import { ListItems } from "../../../../shared/Components/list-item/listItem";
 import ItemPaciente from "../itemPaciente/itemPAciente";
-import { IPaciente } from "../model/paciente";
+import { IPaciente } from "../../model/paciente";
+
 
  // Asegúrate de proporcionar la ruta correcta
 
