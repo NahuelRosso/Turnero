@@ -1,29 +1,49 @@
-import React from 'react';
-import { Paper, Typography } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import ApiServiceDoctor from "../../service/servicesDoctor";
 
-interface ItemProps {
-  itemName: string;
-  quantity: number;
-}
+import { ListItems } from "../../../../shared/Components/list-item/listItem";
+import ItemDoctor from "../itemDoctor/itemDoctor";
+import { IDoctor } from "../../model/doctor.model";
 
-const Item: React.FC<ItemProps> = ({ itemName, quantity }) => {
+
+ // Asegúrate de proporcionar la ruta correcta
+
+export const ListDoctor = () => {
+  const [doctores, setdoctores] = useState<IDoctor[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Llamada a la API para obtener todos los doctores
+    const fetchDoctor = async () => {
+      try {
+        const apiService = new ApiServiceDoctor("http://localhost:8081"); // Reemplaza con la URL de tu API
+        const response = await apiService.getAllDoctor();
+        setdoctores(response); // Actualiza el estado con los pacientes obtenidos
+        setLoading(false); // Cambia el estado de carga a falso
+      } catch (error) {
+        console.error("Error al obtener pacientes:", error);
+        setLoading(false); // Maneja el error y cambia el estado de carga a falso
+      }
+    };
+
+    fetchDoctor(); // Llama a la función para obtener los doctores cuando el componente se monta
+  }, []);
   return (
-    <Paper elevation={3} style={{ padding: '20px', margin: '10px 0' }}>
-      <Typography variant="h6">{itemName}</Typography>
-      <Typography>Cantidad: {quantity}</Typography>
-    </Paper>
+    <>
+      {!loading ? (
+        <ListItems
+          items={doctores}
+          renderItem={(item: IDoctor) => (
+            <ItemDoctor doctor={item} buttonAction={true} />
+          )}
+          handleItemClick={(item: IDoctor) => {
+            console.log(item);
+            // Puedes realizar cualquier acción adicional aquí si es necesario
+          }}
+        ></ListItems>
+      ) : (
+        <div>spinner</div>
+      )}
+    </>
   );
 };
-
-// Ejemplo de uso del componente Item con datos hardcoded
-const ListDoctor: React.FC = () => {
-  return (
-    <div>
-      <Item itemName="Producto 1" quantity={5} />
-      <Item itemName="Producto 2" quantity={10} />
-      <Item itemName="Producto 3" quantity={3} />
-    </div>
-  );
-};
-
-export default ListDoctor;
