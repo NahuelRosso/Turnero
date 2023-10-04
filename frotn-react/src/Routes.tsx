@@ -21,7 +21,6 @@ export const AppRouter = () => {
         <Route path="/" element={<Login/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/createDoctor" element={<CreateDoctor/>} />
-        <Route path="/item" element={<Item itemName={""} quantity={0}/>} />
         <Route path="/listDoctor" element={<ListItems items={[]} renderItem={function (item: any): ReactNode {
           throw new Error("Function not implemented.");
         } } handleItemClick={function (item: any): void {
