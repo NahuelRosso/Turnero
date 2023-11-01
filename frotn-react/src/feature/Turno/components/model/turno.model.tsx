@@ -1,8 +1,8 @@
 export interface ITurno{
     id:string,
-    doctor:string[],
-    paciente:string[],
+    doctor_id:string,
+    paciente_id:string,
     date:string,
-    dateTurno:string,
+    fechaTurno:string,
     addressTurno:string,
 }

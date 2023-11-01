@@ -43,6 +43,7 @@ export default function PatientForm() {
       gender: values.gender,
       phone: values.phone,
       socialWork: values.socialWork, 
+      idPaciente:""
     };
 
     apiService
