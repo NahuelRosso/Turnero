@@ -11,4 +11,5 @@ export interface IPaciente{
     gender: string;
     phone: string;
     socialWork: string;
+    idPaciente:string;
 }

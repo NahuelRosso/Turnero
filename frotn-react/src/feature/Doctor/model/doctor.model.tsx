@@ -11,4 +11,6 @@ export interface IDoctor{
     gender: string;
     phone: string;
     socialWork: string;
+    specialty:string;
+    birthdate:string;
 }

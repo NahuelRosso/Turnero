@@ -1,29 +1,14 @@
-import {
-  Box,
-  Card,
-  Typography,
-  TextField,
-  InputAdornment,
-  IconButton,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  SelectChangeEvent,
-  useTheme,
-  Theme,
-} from "@mui/material";
+import { Box, Card, Typography, TextField, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ITurno } from "../model/turno.model";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import FormControlSelector, { Person } from "../../../../shared/Components/Selector/FormControlSelector"; // Importa Person
-import { format } from 'date-fns';
+import { format } from "date-fns";
 import ApiServiceTurno from "../../service/servicesTurno";
-
+import ReusableModal, {
+  ListItemProps,
+} from "../../../../shared/Components/ModalList/modalList";
 
 export default function FormTurno() {
   const {
@@ -32,37 +17,45 @@ export default function FormTurno() {
     formState: { errors },
   } = useForm<ITurno>();
 
-  const [personName, setPersonName] = useState<string[]>([]);
-  const [selectedPaciente, setSelectedPaciente] = useState<Person[]>([]);
-  const [selectedDateTurno, setSelectedDateTurno] = useState<string | null>(null);
+  const [selectedPatient, setSelectedPatient] = useState<ListItemProps | null>(
+    null
+  );
+  const [selectedDoctor, setSelectedDoctor] = useState<ListItemProps | null>(
+    null
+  );
+  const [selectedDateTurno, setSelectedDateTurno] = useState<string | null>(
+    null
+  );
+  const apiServiceTurno = new ApiServiceTurno("http://localhost:8081");
 
-  const apiServiceTurno = new ApiServiceTurno('URL_DE_TU_BACKEND');
+  const [isPatientModalOpen, setIsPatientModalOpen] = useState(false);
+  const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
 
-
-
-const onSubmit = handleSubmit(async (data) => {
-  try {
-    const formattedDate = selectedDateTurno
-      ? format(new Date(selectedDateTurno), 'dd/MM/yyyy')
-      : '';
-    
-    const turnoData: ITurno = {
-      id: '',
-      doctor:selectedPaciente.map((person) => person.id),
-      paciente: selectedPaciente.map((person) => person.id),
-      date: '', // Este campo es manejado por el backend
-      dateTurno: formattedDate,
-      addressTurno: data.addressTurno,
-    };
-    console.log(turnoData)
-    const response = await apiServiceTurno.createTurno(turnoData);
-
-    console.log('Turno creado exitosamente:', response);
-  } catch (error) {
-    console.error('Error al crear el turno:', error);
-  }
-});
-
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      // Formatea la fecha en el formato correcto
+      const formattedDate = selectedDateTurno
+        ? format(new Date(selectedDateTurno), "dd/MM/yyyy")
+        : "";
+  
+      const turnoData: ITurno = {
+        id: "",
+        doctor_id: selectedDoctor!.id,
+        paciente_id: selectedPatient!.id,
+        fechaTurno: formattedDate,
+        addressTurno: data.addressTurno,
+        date: ""
+      };
+  
+      // Envía el formulario al backend
+      const response = await apiServiceTurno.createTurno(turnoData);
+      console.log(selectedDoctor)
+      console.log("Turno creado exitosamente:", response);
+    } catch (error) {
+      console.error("Error al crear el turno:", error);
+    }
+  });
+ 
 
   return (
     <div>
@@ -76,27 +69,9 @@ const onSubmit = handleSubmit(async (data) => {
         }}
         onSubmit={onSubmit}
       >
-        <Card sx={{ pb: 1 }}>
+        <Card sx={{ pb: 1, width: 600, padding: 5 }}>
           <Typography variant="h4">Reservar Turno</Typography>
           <div>
-            <Box>
-            <FormControlSelector
-                label="Doctor"
-                endpoint="http://localhost:8081/getAllDoctor"
-                onChange={(selectedPacientes: Person[]) => {
-                  setSelectedPaciente(selectedPacientes);
-                }}
-              />
-            </Box>
-            <Box>
-              <FormControlSelector
-                label="Paciente"
-                endpoint="http://localhost:8081/getAllPaciente"
-                onChange={(selectedPacientes: Person[]) => {
-                  setSelectedPaciente(selectedPacientes);
-                }}
-              />
-            </Box>
             <Box>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
@@ -106,6 +81,46 @@ const onSubmit = handleSubmit(async (data) => {
                 />
               </LocalizationProvider>
             </Box>
+            <Button onClick={() => setIsPatientModalOpen(true)}>
+              Seleccione Paciente
+            </Button>
+            <TextField
+              fullWidth
+              label="Paciente Seleccionado"
+              value={
+                selectedPatient
+                  ? `Nombre: ${selectedPatient.name}, Apellido: ${selectedPatient.surname}, Especialidad: ${selectedPatient.specialty}`
+                  : ""
+              }
+              disabled
+            />
+            <Button onClick={() => setIsDoctorModalOpen(true)}>
+              Seleccione Doctor
+            </Button>
+            <TextField
+              fullWidth
+              label="Doctor Seleccionado"
+              value={
+                selectedDoctor
+                  ? `Nombre: ${selectedDoctor.name}, Apellido: ${selectedDoctor.surname}, Especialidad: ${selectedDoctor.specialty}`
+                  : ""
+              }
+              disabled
+            />
+            <ReusableModal
+              label="Seleccionar Paciente"
+              endpoint="http://localhost:8081/getAllPaciente"
+              onSelect={(item) => setSelectedPatient(item)}
+              open={isPatientModalOpen}
+              onClose={() => setIsPatientModalOpen(false)}
+            />
+            <ReusableModal
+              label="Seleccionar Doctor"
+              endpoint="http://localhost:8081/getAllDoctor"
+              onSelect={(item) => setSelectedDoctor(item)}
+              open={isDoctorModalOpen}
+              onClose={() => setIsDoctorModalOpen(false)}
+            />
             <Box>
               <TextField
                 label="Dirección del Centro de Atención"

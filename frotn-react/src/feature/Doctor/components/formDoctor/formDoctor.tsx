@@ -1,88 +1,186 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Grid, Box } from '@mui/material';
+import { IDoctor } from '../../model/doctor.model';
+import ApiServiceDoctor from '../../service/servicesDoctor';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 export const DoctorForm: React.FC = () => {
-    const [formData, setFormData] = useState({
-      fullName: '',
-      dni: '',
-      dateOfBirth: '',
-      address: '',
-      email: '',
-      phone: '',
-      specialty: '',
-    });
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<IDoctor>();
+  const navigate = useNavigate();
+    
     
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-    };
+    const apiService = new ApiServiceDoctor("http://localhost:8081"); // Reemplaza con la URL correcta de tu backend en Java
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      // Aquí puedes agregar la lógica para manejar los datos del formulario
-      console.log(formData);
-    };
+   
+      const onSubmit = handleSubmit((values) => {
+        const datos: IDoctor = {
+          id: "",
+          name: values.name,
+          surname: values.surname,
+          user: values.user,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+          role: values.role,
+          image: "",
+          address: values.address,
+          gender: values.gender,
+          phone: values.phone,
+          socialWork: values.socialWork,
+          specialty: values.specialty,
+          birthdate: values.birthdate
+        };
+    
+        apiService
+          .createDoctor(datos)
+          .then((response: string) => {
+            navigate("/listDoctor");
+            console.log(response);
+          })
+          .catch((error: Error) => {
+            console.error(error);
+          });
+      });
+ 
     return (
       <Container maxWidth="sm">
       <Box sx={{ bgcolor: '#ffffff', borderRadius: 8, p: 2 }}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField
-                label="Nombre y apellido"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                fullWidth />
+            <TextField //Nombre
+              label="Nombre y apellido"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("name", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.name?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.name?.type === "minLength" && {
+                helperText: "El nombre es demaciado corto",
+                error: true,
+              })}
+            />
             </Grid>
             <Grid item xs={12}>
-              <TextField label="DNI" name="dni" value={formData.dni} onChange={handleChange} fullWidth />
+            <TextField //Nombre
+              label="DNI"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("socialWork", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.socialWork?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.socialWork?.type === "minLength" && {
+                helperText: "El nombre es demaciado corto",
+                error: true,
+              })}
+            />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                label="Fecha de nacimiento"
-                name="dateOfBirth"
-                type="date"
-                value={formData.dateOfBirth}
-                onChange={handleChange}
-                fullWidth
-                InputLabelProps={{
-                  shrink: true,
-                }} />
+            <TextField //Nombre
+              label="Fecha Nacimiento"
+              sx={{ m: 1, width: "25ch" }}
+              type="date"
+              {...register("birthdate", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.birthdate?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.birthdate?.type === "minLength" && {
+                helperText: "El nombre es demaciado corto",
+                error: true,
+              })}
+            />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                label="Domicilio"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                fullWidth />
+            <TextField //Nombre
+              label="Domicilio"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("address", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.address?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.address?.type === "minLength" && {
+                helperText: "El nombre es demaciado corto",
+                error: true,
+              })}/>
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                label="Correo electrónico"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                fullWidth />
+            <TextField //Nombre
+              label="Email"
+              sx={{ m: 1, width: "25ch" }}
+              type="email"
+              {...register("user", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.user?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.user?.type === "minLength" && {
+                helperText: "El nombre es demaciado corto",
+                error: true,
+              })}/>
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                label="Teléfono celular"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                fullWidth />
+            <TextField //Nombre
+              label="Teléfono"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("phone", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.phone?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.phone?.type === "minLength" && {
+                helperText: "El nombre es demaciado corto",
+                error: true,
+              })}/>
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                label="Especialidad"
-                name="specialty"
-                value={formData.specialty}
-                onChange={handleChange}
-                fullWidth />
+            <TextField //Nombre
+              label="Especialidad"
+              sx={{ m: 1, width: "25ch" }}
+              type="text"
+              {...register("specialty", {
+                required: true,
+                minLength: 2,
+              })}
+              {...(errors.specialty?.type === "required" && {
+                helperText: "Campo Obligatorio",
+                error: true,
+              })}
+              {...(errors.specialty?.type === "minLength" && {
+                helperText: "El nombre es demaciado corto",
+                error: true,
+              })} />
             </Grid>
             <Grid item xs={12}>
               <Button type="submit" variant="contained" color="primary">

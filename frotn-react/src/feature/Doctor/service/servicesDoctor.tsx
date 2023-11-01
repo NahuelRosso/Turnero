@@ -12,7 +12,7 @@ class ApiServiceDoctor {
   }
 public async createDoctor(doctor: IDoctor): Promise<any> {
     try {
-      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/creatDoctor`, doctor);
+      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/registryDoctor`, doctor);
       return response.data;
     } catch (error) {
       throw new Error((error as AxiosError).message);

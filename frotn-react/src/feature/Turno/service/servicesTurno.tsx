@@ -13,7 +13,7 @@ class ApiServiceTurno {
 
 public async createTurno(turno: ITurno): Promise<any> {
     try {
-      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/registryturno`, turno);
+      const response: AxiosResponse <string> = await axios.post(`${this.baseUrl}/createTurno`, turno);
       return response.data;
     } catch (error) {
       throw new Error((error as AxiosError).message);
