@@ -10,14 +10,16 @@ import {
   ListItemText,
 } from "@mui/material";
 import { MouseEventHandler, useState } from "react";
-import { IDoctor } from "../../model/doctor.model";
+import { ITurno } from "../model/turno.model";
+
+
 
 type Props = {
-  doctor: IDoctor;
+  turno: ITurno;
   buttonAction?: boolean;
 };
 
-function ItemDoctor(props: Props) {
+function ItemTruno(props: Props) {
   
   const [showAlert, setShowAlert] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -43,14 +45,14 @@ function ItemDoctor(props: Props) {
     <>
       {" "}
       <>
-        <ListItemAvatar>
-          <Avatar src={props.doctor.image} alt={props.doctor.name} />
-        </ListItemAvatar>
+        {/* <ListItemAvatar>
+          <Avatar src={props.turno.image} alt={props.turno.name} />
+        </ListItemAvatar> */}
 
         <ListItemText
         sx={{color:"black"}}
-          primary={props.doctor.name}
-          secondary={`name: ${props.doctor.name}, phone: ${props.doctor.phone}`}
+          primary={props.turno.paciente_id}
+          secondary={`name: ${props.turno.doctor_id}, phone: ${props.turno.fechaTurno}`}
         />
         {props.buttonAction == true ? (
           <>
@@ -93,4 +95,4 @@ function ItemDoctor(props: Props) {
     </>
   );
 }
-export default ItemDoctor;
+export default ItemTruno;

@@ -10,6 +10,8 @@ import { ReactNode } from "react";
 import { ListPaciente } from "./feature/Paciente/components/listPaciente/listPaciente";
 import FormTurnoPage from "./pages/crearTurno/formTurno.page";
 import HistorialClinicoForm from "./feature/HistorialClinico/components/formHistorialClinico/formHistorialClinico";
+import ListTrunoPage from "./pages/listTurnos/listTurno.page";
+import { ListDoctor } from "./feature/Doctor/components/listDoctor/listDoctor";
 
 
 
@@ -22,15 +24,12 @@ export const AppRouter = () => {
         <Route path="/" element={<Login/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/createDoctor" element={<CreateDoctor/>} />
-        <Route path="/listDoctor" element={<ListItems items={[]} renderItem={function (item: any): ReactNode {
-          throw new Error("Function not implemented.");
-        } } handleItemClick={function (item: any): void {
-          throw new Error("Function not implemented.");
-        } }/>} />
+        <Route path="/listDoctor" element={<ListDoctor/>} />
         <Route path="/createPaciente" element={<CreatePaciente/>} />
         <Route path="/Pacientes" element={<ListPaciente/>} />
         <Route path="/turno" element={<FormTurnoPage/>} />
         <Route path="/historialClinico" element={<HistorialClinicoForm/>} />
+        <Route path="/turnos" element={<ListTrunoPage/>} />
 
         
       </Routes>

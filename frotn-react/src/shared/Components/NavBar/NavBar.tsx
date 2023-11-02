@@ -68,7 +68,7 @@ export default function NavBar() {
            onClose={handleNotificationClose}
         >
         <Alert onClose={handleNotificationClose} severity="info">
-          Usuario2 ha enviado un archivo
+          Usuario ha enviado un archivo
         </Alert>
         </Snackbar>
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -87,12 +87,11 @@ export default function NavBar() {
           id="user-menu2"
           anchorEl={anchorEl2}
           open={Boolean(anchorEl2)}
-          onClose={handleUsuarioClose}
           >
-            <MenuItem onClick={handleUsuarioClose}>Perfil</MenuItem>
-            <MenuItem onClick={handleUsuarioClose}>Archivo</MenuItem>
+            <MenuItem >Perfil</MenuItem>
+            <MenuItem >Archivo</MenuItem>
             <MenuItem onClick={handleUsuarioClose}>Cerrar Sesión</MenuItem>
-            <MenuItem onClick={handleUsuarioClose}>Ajustes</MenuItem>
+            <MenuItem >Ajustes</MenuItem>
           </Menu>
           </div>
           </div>

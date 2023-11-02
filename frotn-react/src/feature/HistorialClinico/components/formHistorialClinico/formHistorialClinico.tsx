@@ -26,7 +26,7 @@ const HistorialClinicoForm: React.FC = () => {
 
   return (
     <Container maxWidth="sm">
-      <Paper elevation={3} style={{ padding: '20px' }}>
+      <Paper elevation={3} style={{ padding: '20px',  background:"#DAF7A6 " }}>
         <Typography variant="h5" gutterBottom>
           Crear Historial Clínico
         </Typography>

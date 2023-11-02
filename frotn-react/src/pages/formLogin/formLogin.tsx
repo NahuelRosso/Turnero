@@ -73,7 +73,7 @@ export const Login = () => {
         sx={{ minHeight: "100vh" }}
       >
         <Grid item>
-          <Paper sx={{ padding: "1.2em", borderRadius: "0.5em" }}>
+          <Paper sx={{ padding: "1.2em", borderRadius: "0.5em",  background:"#DAF7A6 " }}>
             <Typography sx={{ mt: 1, mb: 1 }} variant="h4">
               Log In
             </Typography>

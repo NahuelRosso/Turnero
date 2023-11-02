@@ -16,7 +16,7 @@ import ApiServicePaciente from "../../service/servicePaciente";
 
 import { useForm } from "react-hook-form";
 import { IPaciente } from "../../model/paciente";
-
+import "./formPaciente.css";
 
 export default function PatientForm() {
   const {
@@ -42,8 +42,8 @@ export default function PatientForm() {
       address: values.address,
       gender: values.gender,
       phone: values.phone,
-      socialWork: values.socialWork, 
-      idPaciente:""
+      socialWork: values.socialWork,
+      idPaciente: "",
     };
 
     apiService
@@ -78,11 +78,12 @@ export default function PatientForm() {
       }}
       onSubmit={onSubmit}
     >
-      <Card sx={{ pb: 1 }}>
-        <Typography variant="h4">Register Patient</Typography>
+      <Card sx={{ pt:2,pb: 2,  background:"rgba(0, 0, 0, 0.5)", width: "600px", mt:"50px", mb:"50px" }}>
+        <Typography variant="h3" sx={{color:"white"}}>Registro de Paciente</Typography>
         <div>
           <Box>
             <TextField //Nombre
+              className="textfield"
               label="Name"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -102,6 +103,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField //Apellido
+              className="textfield"
               label="Surname"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -117,6 +119,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField
+              className="textfield"
               label="Phone"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -137,6 +140,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField
+              className="textfield"
               label="Social Work"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -157,6 +161,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField
+              className="textfield"
               label="DNI"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -177,6 +182,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField
+              className="textfield"
               label="Home address"
               sx={{ m: 1, width: "25ch" }}
               type="text"
@@ -197,6 +203,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField
+              className="textfield"
               label="Email"
               sx={{ m: 1, width: "25ch" }}
               type="email"
@@ -217,6 +224,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField
+              className="textfield"
               sx={{ m: 1, width: "25ch" }}
               type={showPassword ? "text" : "password"}
               label="Password"
@@ -260,6 +268,7 @@ export default function PatientForm() {
           </Box>
           <Box>
             <TextField
+              className="textfield"
               sx={{ m: 1, width: "25ch" }}
               type={showPassword ? "text" : "password"}
               label="Confirm Password"

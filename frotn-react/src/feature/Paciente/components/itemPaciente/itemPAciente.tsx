@@ -49,6 +49,7 @@ function ItemPaciente(props: Props) {
         </ListItemAvatar>
 
         <ListItemText
+        sx={{color:"black"}}
           primary={props.paciente.name}
           secondary={`name: ${props.paciente.name}, phone: ${props.paciente.phone}`}
         />

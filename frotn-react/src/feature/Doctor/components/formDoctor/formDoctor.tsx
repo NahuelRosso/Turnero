@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Grid, Box } from '@mui/material';
+import { TextField, Button, Container, Grid, Box, Typography } from '@mui/material';
 import { IDoctor } from '../../model/doctor.model';
 import ApiServiceDoctor from '../../service/servicesDoctor';
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +50,10 @@ export const DoctorForm: React.FC = () => {
  
     return (
       <Container maxWidth="sm">
-      <Box sx={{ bgcolor: '#ffffff', borderRadius: 8, p: 2 }}>
+      <Box sx={{  background:"#DAF7A6 ", borderRadius: 8, p: 2 }}>
+      <Typography variant="h4" sx={{color:'black'}} >
+        Crear Doctor
+      </Typography>
         <form onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

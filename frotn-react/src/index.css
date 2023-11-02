@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('C:\Turnero\frotn-react\src\shared\img\Logo.png'); /* Cambia la ruta de la imagen según la ubicación de tu imagen */
+  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir toda la pantalla */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+  background-attachment: fixed; /* Opcional: fija la imagen de fondo */
 }
 
 code {

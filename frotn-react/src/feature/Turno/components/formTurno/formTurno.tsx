@@ -66,10 +66,11 @@ export default function FormTurno() {
           justifyContent: "center",
           alignItems: "center",
           minHeight: "100vh",
+          
         }}
         onSubmit={onSubmit}
       >
-        <Card sx={{ pb: 1, width: 600, padding: 5 }}>
+        <Card sx={{ pb: 1, width: 600, padding: 5, background:"#DAF7A6 " }}>
           <Typography variant="h4">Reservar Turno</Typography>
           <div>
             <Box>
