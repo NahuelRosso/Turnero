@@ -1,7 +1,7 @@
 import { Box, Card, Typography, TextField, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ITurno } from "../model/turno.model";
+import { ITurno } from "../../model/turno.model";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { format } from "date-fns";
@@ -30,6 +30,7 @@ export default function FormTurno() {
 
   const [isPatientModalOpen, setIsPatientModalOpen] = useState(false);
   const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false);
+  const [savedTurno, setSavedTurno] = useState<ITurno | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -37,25 +38,25 @@ export default function FormTurno() {
       const formattedDate = selectedDateTurno
         ? format(new Date(selectedDateTurno), "dd/MM/yyyy")
         : "";
-  
+
       const turnoData: ITurno = {
         id: "",
         doctor_id: selectedDoctor!.id,
         paciente_id: selectedPatient!.id,
         fechaTurno: formattedDate,
         addressTurno: data.addressTurno,
-        date: ""
+        date: "",
       };
-  
+
       // Envía el formulario al backend
       const response = await apiServiceTurno.createTurno(turnoData);
-      console.log(selectedDoctor)
+      setSavedTurno(turnoData);
+      console.log(selectedDoctor);
       console.log("Turno creado exitosamente:", response);
     } catch (error) {
       console.error("Error al crear el turno:", error);
     }
   });
- 
 
   return (
     <div>
@@ -66,11 +67,10 @@ export default function FormTurno() {
           justifyContent: "center",
           alignItems: "center",
           minHeight: "100vh",
-          
         }}
         onSubmit={onSubmit}
       >
-        <Card sx={{ pb: 1, width: 600, padding: 5, background:"#DAF7A6 " }}>
+        <Card sx={{ pb: 1, width: 600, padding: 5, background: "#DAF7A6 " }}>
           <Typography variant="h4">Reservar Turno</Typography>
           <div>
             <Box>
@@ -144,6 +144,24 @@ export default function FormTurno() {
             <Button type="submit" variant="contained">
               Submit
             </Button>
+            {savedTurno && (
+              <Card sx={{ mt: 2, p: 2 }}>
+                <Typography variant="h5">Detalles del Turno</Typography>
+                <Typography>ID del Turno: {savedTurno.id}</Typography>
+                <Typography>
+                  Doctor: {selectedDoctor?.name} {selectedDoctor?.surname}
+                </Typography>
+                <Typography>
+                  Paciente: {selectedPatient?.name} {selectedPatient?.surname}
+                </Typography>
+                <Typography>
+                  Fecha del Turno: {savedTurno.fechaTurno}
+                </Typography>
+                <Typography>
+                  Dirección del Centro de Atención: {savedTurno.addressTurno}
+                </Typography>
+              </Card>
+            )}
           </div>
         </Card>
       </Box>

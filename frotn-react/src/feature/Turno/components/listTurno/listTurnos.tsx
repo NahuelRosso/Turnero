@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 
 import { ListItems } from "../../../../shared/Components/list-item/listItem";
-import { ITurno } from "../model/turno.model";
+import { ITurno } from "../../model/turno.model";
 import ApiServiceTurno from "../../service/servicesTurno";
 import ItemTruno from "../itemTurno/itemTurno";
 

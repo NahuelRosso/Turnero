@@ -10,7 +10,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { MouseEventHandler, useState } from "react";
-import { ITurno } from "../model/turno.model";
+import { ITurno } from "../../model/turno.model";
 
 
 

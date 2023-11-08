@@ -49,8 +49,8 @@ export const DoctorForm: React.FC = () => {
       });
  
     return (
-      <Container maxWidth="sm">
-      <Box sx={{  background:"#DAF7A6 ", borderRadius: 8, p: 2 }}>
+      <Container maxWidth="sm" sx={{mt:10}}>
+      <Box sx={{  background:"#DAF7A6 ", borderRadius: 8, p: 2, mt: 5 }}>
       <Typography variant="h4" sx={{color:'black'}} >
         Crear Doctor
       </Typography>
@@ -96,7 +96,7 @@ export const DoctorForm: React.FC = () => {
             </Grid>
             <Grid item xs={12}>
             <TextField //Nombre
-              label="Fecha Nacimiento"
+              label=""
               sx={{ m: 1, width: "25ch" }}
               type="date"
               {...register("birthdate", {

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { ITurno } from "../components/model/turno.model";
+import { ITurno } from "../model/turno.model";
 
 
 
