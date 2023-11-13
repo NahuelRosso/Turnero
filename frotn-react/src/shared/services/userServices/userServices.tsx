@@ -26,16 +26,37 @@ class ApiService {
     }
   }
 
-  async login(loginData: ILoginUser): Promise<ILoginUser> {
+  async login(loginData: ILoginUser): Promise<string> {
     try {
-      const response: AxiosResponse<ILoginUser> = await axios.post(
-        `${this.baseUrl}/login`,
-        loginData
-      );
-      return response.data;
+      const response: AxiosResponse<{ token: string }> = await axios.post(`${this.baseUrl}/login`, loginData);
+      const token = response.data.token;
+
+      if (!token) {
+        console.error('No hay Token');
+        throw new Error('No hay Token');
+      }
+
+      return token;
     } catch (error) {
-      throw new Error('Error de inicio de sesión');
+      console.error('Error de inicio de sesión:', error);
+
+      if (error instanceof Error) {
+        console.error('Mensaje de error:', error.message);
+      }
+
+      throw error;
     }
+  }
+
+  public setAuthToken(token: string): void {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  }
+  public clearAuthToken(): void {
+    delete axios.defaults.headers.common['Authorization'];
+  }
+  logout(): void {
+    // Limpiar el token en localStorage u otras acciones necesarias
+    localStorage.removeItem('token');
   }
 }
 

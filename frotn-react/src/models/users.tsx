@@ -12,5 +12,5 @@ export interface IUser {
     email:string;
   }
   
-  export type ILoginUser = Pick<IUser, "email" | "password">;
+  export type ILoginUser = Pick<IUser, "email" | "password"|"id">;
   

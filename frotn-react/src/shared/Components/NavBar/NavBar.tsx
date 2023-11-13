@@ -9,6 +9,7 @@ import Snackbar from '@mui/material/Snackbar';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import TemporaryDrawer from './Drawer';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../services/session/session';
 
 const navItems = ['Inicio', 'Turno', 'Historial Clínica', 'Crear Registro', 'Profesionales', 'Administradores', 'Informaciones'];
 
@@ -30,9 +31,11 @@ export default function NavBar() {
   const handleUsuarioClick = (event: any) => {
     setAnchorEl2(event.currentTarget);
   };
+  const { logout } = useAuth();
   const handleUsuarioClose = () => {
-    navigate("/");
+    logout(); // Llamada a la función de logout
     setAnchorEl2(null);
+    navigate('/');
   };
 
   //Notificacion
